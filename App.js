@@ -1,21 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
 
-export default function App() {
+function HookProblem() {
+  const [darkMode, setDarkMode] = useState(false);
+  const styles = useStyles(darkMode);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={styles.con}>
+      <Text style={styles.text}>
+        {darkMode ? "That's Dark Mode" : "That's Light Mode"}
+      </Text>
+      <Button title="Dark Mode" onPress={() => setDarkMode(true)} />
+      <Button title="Light Mode" onPress={() => setDarkMode(false)} />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function useStyles(darkMode) {
+  return StyleSheet.create({
+    con: {
+      backgroundColor: darkMode ? "black" : "#ffd",
+      flex: 1,
+      justifyContent: "center",
+    },
+    text: {
+      textAlign: "center",
+      color: darkMode ? "white" : "black",
+      paddingBottom: 15,
+    },
+  });
+}
+
+export default HookProblem;
